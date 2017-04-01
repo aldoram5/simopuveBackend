@@ -8,6 +8,7 @@ package com.simopuve.rest;
 import com.simopuve.model.DummyContent;
 import com.simopuve.model.PDVHeader;
 import com.simopuve.model.PDVSurvey;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -38,7 +39,7 @@ public class TestRest {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveSurvey(PDVSurvey survey){
         
-        return Response.status(201).build();
+        return Response.status(201).entity(survey.getHeader()).build();
     }
 
     
@@ -54,6 +55,6 @@ public class TestRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response logUserIn(@HeaderParam("user-agent") String userAgent, @HeaderParam("Authorization") String authorization){
                
-        return Response.status(200).entity( new PDVHeader("Terapaca", "dirección chilena", "comuna bonita", 0, 0, 0, null, "Pepe Perez", 0)).build();
+        return Response.status(200).entity( new PDVHeader("Terapaca", "dirección chilena", "comuna bonita", 0, 0, 0, new Date(), "Pepe Perez", 0)).build();
     }
 }
