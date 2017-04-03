@@ -37,6 +37,7 @@ public class TestRest {
     @Path("/survey")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response saveSurvey(PDVSurvey survey){
         
         return Response.status(201).entity(survey.getHeader()).build();
