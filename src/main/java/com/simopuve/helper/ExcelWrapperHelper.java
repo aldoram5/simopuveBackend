@@ -35,10 +35,9 @@ public class ExcelWrapperHelper {
             Sheet sheet = book1.getSheetAt(0); 
             ExcelFiller.fillHeader(survey.getHeader(),sheet);
             ExcelFiller.fillRows(sheet, survey.getRows());
-            try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
-                book1.write(fileOut);
-            }
-
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            book1.write(fileOut);
+            fileOut.close();
         } catch (IOException ex) {
             Logger.getLogger(ExcelWrapperHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
