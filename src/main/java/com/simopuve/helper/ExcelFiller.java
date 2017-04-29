@@ -155,6 +155,8 @@ public class ExcelFiller {
                                 cell = row.getCell(tmpCoordinate.getCellY() + 2);
                                 cell.setCellValue((Integer) year);
                                 break;
+                            case UsefulConstants.T_BOOLEAN:
+                                cell.setCellValue(((Boolean)value) ? "SI" : "NO");
                             default:
                                 break;
                         }

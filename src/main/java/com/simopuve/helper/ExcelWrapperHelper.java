@@ -26,7 +26,7 @@ public class ExcelWrapperHelper {
     public static void WritePDVToExcell(PDVSurvey survey){
         String pointOfSaleName = survey.getHeader().getPointOfSaleName().replace(" ", "");
         String folderName = new StringBuilder().append(new DecimalFormat("00").format(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).append("-").append(new DecimalFormat("00").format(Calendar.getInstance().get(Calendar.MONTH) + 1)).append("-").append(Calendar.getInstance().get(Calendar.YEAR)).toString();
-        String filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/").append(folderName).append("/").toString();
+        String filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/").append(folderName).append("/").append(survey.getHeader().isMall() ? "Mall/" : "Oficina/").toString();
         String fileName = new StringBuilder(pointOfSaleName).append(".xls").toString();
         InputStream is = Thread.currentThread ().getContextClassLoader ()
                 .getResourceAsStream ( "pseudo-platilla.xlsx" );
