@@ -126,6 +126,7 @@ public class ExcelFiller {
                 String propertyName = propertyDesc.getName();
                 if (!UsefulConstants.T_CLASS.equals(propertyName)) {
                     PropertyCoordinates tmpCoordinate = (PropertyCoordinates) headerMap.get(propertyName);
+                    if(tmpCoordinate == null)continue;
                     Object value = propertyDesc.getReadMethod().invoke(bean);                    
                     Row row = sheet.getRow(tmpCoordinate.getRowX());
                     Cell cell = row.getCell(tmpCoordinate.getCellY());
