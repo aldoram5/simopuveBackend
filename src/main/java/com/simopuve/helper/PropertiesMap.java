@@ -47,4 +47,19 @@ public class PropertiesMap {
         tmpMap.put("portabilityChangeReason", new PropertyCoordinates(0, 13));
         return tmpMap;
     }
+    
+    public static Map getPDVHeaderPositonsForFlowBase() {
+        Map tmpMap = new HashMap();
+        tmpMap.put("pointOfSaleName", new PropertyCoordinates(null, 0));
+        tmpMap.put("address", new PropertyCoordinates(null, 1));
+        tmpMap.put("comuna", new PropertyCoordinates(null, 2));
+        tmpMap.put("numberOfPeopleAM", new PropertyCoordinates(null, 6));
+        tmpMap.put("numberOfPeoplePM", new PropertyCoordinates(null, 7));
+        tmpMap.put("peopleWithBags", new PropertyCoordinates(null, 8));
+        tmpMap.put("surveyDate", new PropertyCoordinates(null, 4));
+        tmpMap.put("completeName", new PropertyCoordinates(null, 5));
+        tmpMap.put("numberOfPeopleDidNotAnswer", new PropertyCoordinates(null, 9));
+        tmpMap.put("mall", new PropertyCoordinates(null, 13));
+        return tmpMap;
+    }
 }

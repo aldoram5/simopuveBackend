@@ -6,9 +6,13 @@
 package com.simopuve.rest;
 
 import com.simopuve.helper.ExcelWrapperHelper;
+import static com.simopuve.helper.FlowDataCreator.FillFlowBaseSheet;
+import com.simopuve.helper.POIHelper;
+import static com.simopuve.helper.ReadPVDFromFile.getPDVSurveyFromFile;
 import com.simopuve.model.BrandDevices;
 import com.simopuve.model.PDVHeader;
 import com.simopuve.model.PDVSurvey;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +30,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -43,6 +49,39 @@ public class SimopuveRESTServices {
     public Response getDummyResponse(@HeaderParam("user-agent") String userAgent, @HeaderParam("Authorization") String authorization) {
         return Response.ok("User Agent: " + userAgent + "\n" + "Authorization: " + authorization).build();
     }
+
+    @Path("/helloworld")
+    @GET
+    @Produces("text/plain")
+    public String getClichedMessage() {
+        
+        String filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/pdv2.xlsx").toString();
+        PDVSurvey survey = null;
+        try {
+            survey = getPDVSurveyFromFile(filePath, false);
+            survey.getHeader();
+            
+            List<PDVSurvey> surveyList = new ArrayList<>();
+            surveyList.add(survey);
+
+            
+            
+            filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/testFlow.xlsx").toString();
+            
+            Workbook flowWorkbook = POIHelper.getWorkbookFromLocalReource("plantilla-base-flujo.xlsx");
+            FillFlowBaseSheet(surveyList, flowWorkbook.getSheetAt(0));
+            POIHelper.writeWorkbookInPath(flowWorkbook, filePath);
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        return "ewwe: " ;
+    }
+    
 
     @Path("/brandDevices")
     @GET
