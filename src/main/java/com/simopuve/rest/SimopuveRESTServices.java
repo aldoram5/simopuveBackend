@@ -58,6 +58,7 @@ public class SimopuveRESTServices {
         String filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/pdv2.xlsx").toString();
         PDVSurvey survey = null;
         try {
+            
             survey = getPDVSurveyFromFile(filePath, false);
             survey.getHeader();
             
