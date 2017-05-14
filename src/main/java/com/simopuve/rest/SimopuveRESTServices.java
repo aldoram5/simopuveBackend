@@ -6,6 +6,7 @@
 package com.simopuve.rest;
 
 import com.simopuve.helper.ExcelWrapperHelper;
+import static com.simopuve.helper.FlowDataCreator.FillDetailBaseSheet;
 import static com.simopuve.helper.FlowDataCreator.FillFlowBaseSheet;
 import com.simopuve.helper.POIHelper;
 import static com.simopuve.helper.ReadPVDFromFile.getPDVSurveyFromFile;
@@ -71,6 +72,7 @@ public class SimopuveRESTServices {
             
             Workbook flowWorkbook = POIHelper.getWorkbookFromLocalReource("plantilla-base-flujo.xlsx");
             FillFlowBaseSheet(surveyList, flowWorkbook.getSheetAt(0));
+            FillDetailBaseSheet(surveyList, flowWorkbook.getSheetAt(1));
             POIHelper.writeWorkbookInPath(flowWorkbook, filePath);
             
             
