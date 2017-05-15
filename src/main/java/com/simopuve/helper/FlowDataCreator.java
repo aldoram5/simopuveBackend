@@ -7,6 +7,8 @@ package com.simopuve.helper;
 
 import static com.simopuve.helper.POIHelper.espBoolean;
 import static com.simopuve.helper.POIHelper.getFlowBaseFormatDate;
+import static com.simopuve.helper.POIHelper.getMonthNumber;
+import static com.simopuve.helper.POIHelper.getWeekNumber;
 import com.simopuve.model.PDVHeader;
 import com.simopuve.model.PDVRow;
 import com.simopuve.model.PDVSurvey;
@@ -79,11 +81,11 @@ public class FlowDataCreator {
                 
                 //TODO
                 cell = row.createCell(15);
-		cell.setCellValue("Semana");
+		cell.setCellValue(getWeekNumber(header.getSurveyDate()));
                 
                 //TODO
                 cell = row.createCell(16);
-		cell.setCellValue("mes");
+		cell.setCellValue(getMonthNumber(header.getSurveyDate()));
                 
                 cell = row.createCell(17);
 		cell.setCellValue((header.isMall()) ? "Mall" : "Oficina");
@@ -160,10 +162,11 @@ public class FlowDataCreator {
 
             //TODO Semana
             cell = row.createCell(11);
-            cell.setCellValue("Por definir");
+            cell.setCellValue(getWeekNumber(header.getSurveyDate()));
+            
             //TODO Mes
             cell = row.createCell(12);
-            cell.setCellValue("Por definir");
+            cell.setCellValue(getMonthNumber(header.getSurveyDate()));
 
             cell = row.createCell(13);
             cell.setCellValue((header.isMall()) ? "Mall" : "Oficina");

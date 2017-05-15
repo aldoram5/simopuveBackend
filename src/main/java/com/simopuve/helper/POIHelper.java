@@ -17,12 +17,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.joda.time.Weeks;
 
 /**
  *
  * @author neseiza
  */
 public class POIHelper {
+
+    private static DateTime initDate = new DateTime(2009, 6, 1, 0, 0, 0, 0);
 
     public static Workbook getWorkbookFromLocalReource(String resourceName) {
         Workbook wb = null;
@@ -57,8 +62,8 @@ public class POIHelper {
     public static String getFlowBaseFormatDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        
-        return cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.MONTH)+ "/" + cal.get(Calendar.YEAR);
+
+        return cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.MONTH) + "/" + cal.get(Calendar.YEAR);
     }
 
     public static String getMothSpName(int MonthNmb) {
@@ -115,9 +120,25 @@ public class POIHelper {
             Logger.getLogger(POIHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static String espBoolean(Boolean exp){
-        return exp ? "SÍ" : "NO" ; 
+
+    public static String espBoolean(Boolean exp) {
+        return exp ? "SÍ" : "NO";
+    }
+
+    public static Integer getMonthNumber(Date currentDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
+        Months m = Months.monthsBetween(initDate, nowDate);
+        return m.getMonths();
+    }
+
+    public static Integer getWeekNumber(Date currentDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
+        Weeks w = Weeks.weeksBetween(initDate, nowDate);
+        return w.getWeeks();
     }
 
 //    public static void tmp() {
