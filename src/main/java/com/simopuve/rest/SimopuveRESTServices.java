@@ -66,8 +66,6 @@ public class SimopuveRESTServices {
             List<PDVSurvey> surveyList = new ArrayList<>();
             surveyList.add(survey);
 
-            
-            
             filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/testFlow.xlsx").toString();
             
             Workbook flowWorkbook = POIHelper.getWorkbookFromLocalReource("plantilla-base-flujo.xlsx");
@@ -99,8 +97,8 @@ public class SimopuveRESTServices {
         BrandDevices b2 = new BrandDevices("HTC", Arrays.asList("ONE A9S", "ESIRE 10 LIFESTYLE A56", "DESIRE 530", "10", "ONE M9", "DESIRE 626S", "OTROS"));
         BrandDevices b3 = new BrandDevices("HUAWEI", Arrays.asList("P10 VTR-L09", "ROUTER B310", "MATE 9 MHA-L09", "MODEM WINGLE E8372", "MODEM MIFI E5573", "GR3 TANGO TAG-L03", "P9 LITE VNS-L23", "Y5 II CUN-L03", "Y3 II LUA-L03", "E3372", "P9 PLUS VIE-L09", "P9 EVA-L09", "GR5 KII L23", "MATE 8 NXT-L09", "Y6 LTE", "P8 LITE", "OTROS"));
         BrandDevices b4 = new BrandDevices("IPHONE", Arrays.asList("4", "4S", "5", "5S", "5C", "6", "6 PLUS", "7", "7 PLIS", "SE", "OTROS"));
-        BrandDevices b5 = new BrandDevices("LG", Arrays.asList("K8 LTE K350F", "STYLUS II K530", "G5 SE H840�", "G5 SE H840", "�K10 LTE K430T", "H960A V10 LTE", "G4 STYLUS H635", "LEON CK H340F", "G4 LTE H815P", "L LIFT D290", "OTROS"));
-        BrandDevices b6 = new BrandDevices("MOTOROLA", Arrays.asList("MOTO Z PLAY", "MOTO Z PLAY", "MOTO G 4TA GEN", "MOTO G 2DA GEN LTE", "MOTO X PLAY", "MOTO G 3RA GEN", "OTROS"));
+        BrandDevices b5 = new BrandDevices("LG", Arrays.asList("K8 LTE K350F", "STYLUS II K530", "G5 SE H840", "G5 SE H840", "K10 LTE K430T", "H960A V10 LTE", "G4 STYLUS H635", "LEON CK H340F", "G4 LTE H815P", "L LIFT D290", "OTROS"));
+        BrandDevices b6 = new BrandDevices("MOTOROLA", Arrays.asList("MOTO Z PLAY", "MOTO G 4TA GEN", "MOTO G 2DA GEN LTE", "MOTO X PLAY", "MOTO G 3RA GEN", "OTROS"));
         BrandDevices b7 = new BrandDevices("ZTE", Arrays.asList("MODEM MIFI MF920T", "MODEM WINGLE MF79S", "BLADE A610", "Blade L110", "BLADE V6 PLUS", "BLADE L5 PLUS", "BLADE A510", "BLADE A460", "BLADE L3", "OTROS"));
         BrandDevices b8 = new BrandDevices("SAMSUNG", Arrays.asList("GALAXY A720F", "GALAXY J2 PRIME G532M", "GALAXY J5 PRIME G570M", "GALAXY J7 PRIME G610M", "GALAXY J7 2016 J710MN", "GALAXY J5 2016 J510MN", "GALAXY J3 LTE J320", "GALAXY J1 ACE VE LTE J111M", "GALAXY S7 EDGE G935F", "GALAXY S7 G930F", "GALAXY J2 LTE J200M", "GALAXY J5 LTE J500M", "E7 LTE E700M", "GALAXY A5 A500Y", "GALAXY CORE PRIME LTE G360GY", "OTROS"));
         BrandDevices b9 = new BrandDevices("LANIX", Arrays.asList("X110", "X500B", "ILIUM L820", "OTROS"));
