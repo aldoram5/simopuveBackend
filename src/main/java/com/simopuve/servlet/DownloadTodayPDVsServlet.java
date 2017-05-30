@@ -12,7 +12,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.servlet.ServletException;
@@ -52,7 +54,7 @@ public class DownloadTodayPDVsServlet extends HttpServlet {
                 //
                 // Call the zipFiles method for creating a zip stream.
                 //
-                byte[] zip = zipFiles(directory, files);
+                byte[] zip = zipFiles(directory, files, folderPath);
 
                 //
                 // Sends the response back to the user / browser. The
@@ -74,12 +76,15 @@ public class DownloadTodayPDVsServlet extends HttpServlet {
 
     }
 
-    private byte[] zipFiles(File directory, String[] files) throws IOException {
+    private byte[] zipFiles(File directory, String[] files, String sourceDir) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ZipOutputStream zos = new ZipOutputStream(baos);
         byte bytes[] = new byte[2048];
 
-        for (String fileName : files) {
+	List<String> fileList = new ArrayList<String>();
+        generateFileList(directory, fileList, sourceDir);
+        
+        for (String fileName : fileList) {
             FileInputStream fis = new FileInputStream(directory.getPath()
                     + "/" + fileName);
             BufferedInputStream bis = new BufferedInputStream(fis);
@@ -102,6 +107,28 @@ public class DownloadTodayPDVsServlet extends HttpServlet {
         return baos.toByteArray();
     }
 
+    
+    private void generateFileList(File node, List<String> fileList, String sourceFolder){
+
+    	//add file only
+	if(node.isFile()){
+		fileList.add(generateZipEntry(node.getAbsoluteFile().toString(),sourceFolder) );
+	}
+
+	if(node.isDirectory()){
+		String[] subNote = node.list();
+		for(String filename : subNote){
+			generateFileList(new File(node, filename), fileList, sourceFolder);
+		}
+	}
+
+    }
+    
+    private String generateZipEntry(String file,String sourceFolder){
+    	return file.substring(sourceFolder.length()+1, file.length());
+    }
+
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
