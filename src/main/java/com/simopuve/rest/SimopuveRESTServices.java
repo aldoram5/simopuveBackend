@@ -193,6 +193,9 @@ public class SimopuveRESTServices {
                 if (values.length > 0 && values[0].contentEquals("prueba") && values[1].contentEquals("prueba")) {
 
                     return Response.status(200).entity(new PDVHeader("Terapaca", "dirección chilena", "comuna bonita", 0, 0, 0, new Date(), "Usuario Pruebas", 0)).build();
+                }if (values.length > 0 && values[0].contentEquals("Prueba") && values[1].contentEquals("Prueba")) {
+
+                    return Response.status(200).entity(new PDVHeader("Terapaca", "dirección chilena", "comuna bonita", 0, 0, 0, new Date(), "Usuario Pruebas", 0)).build();
                 }
                 if(logins.containsKey(credentials)){
                     return Response.status(200).entity(logins.get(credentials)).build();
