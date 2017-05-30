@@ -125,7 +125,7 @@ public class DownloadTodayPDVsServlet extends HttpServlet {
     }
     
     private String generateZipEntry(String file,String sourceFolder){
-    	return file.substring(sourceFolder.length()+1, file.length());
+    	return file.substring(sourceFolder.length(), file.length());
     }
 
     
