@@ -88,7 +88,7 @@ public class DownloadTodayPDVsServlet extends HttpServlet {
             FileInputStream fis = new FileInputStream(directory.getPath()
                     + "/" + fileName);
             BufferedInputStream bis = new BufferedInputStream(fis);
-
+            fileName = fileName.replace("/", "-");
             zos.putNextEntry(new ZipEntry(fileName));
 
             int bytesRead;
