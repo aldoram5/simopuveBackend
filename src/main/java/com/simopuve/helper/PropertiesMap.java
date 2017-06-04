@@ -31,20 +31,20 @@ public class PropertiesMap {
     
     public static Map getPDVRowPropertiesCoordinatesByName() {
         Map tmpMap = new HashMap();
-        tmpMap.put("personNumber", new PropertyCoordinates(0, 0));
-        tmpMap.put("deviceBrand", new PropertyCoordinates(0, 1));
-        tmpMap.put("deviceModel", new PropertyCoordinates(0, 2));
-        tmpMap.put("contractType", new PropertyCoordinates(0, 3));
-        tmpMap.put("deviceMode", new PropertyCoordinates(0, 4));
-        tmpMap.put("additionalCharacteristics", new PropertyCoordinates(0, 5));
-        tmpMap.put("boughtCard", new PropertyCoordinates(0, 6));
-        tmpMap.put("boughtChip", new PropertyCoordinates(0, 7));
-        tmpMap.put("boughtAccessory", new PropertyCoordinates(0, 8));
-        tmpMap.put("planRating", new PropertyCoordinates(0, 9));
-        tmpMap.put("deviceRating", new PropertyCoordinates(0, 10));
-        tmpMap.put("expressRefillValue", new PropertyCoordinates(0, 11));
-        tmpMap.put("portabilityChange", new PropertyCoordinates(0, 12));
-        tmpMap.put("portabilityChangeReason", new PropertyCoordinates(0, 13));
+        tmpMap.put("personNumber", new PropertyCoordinates(null, 0));
+        tmpMap.put("deviceBrand", new PropertyCoordinates(null, 1));
+        tmpMap.put("deviceModel", new PropertyCoordinates(null, 2));
+        tmpMap.put("contractType", new PropertyCoordinates(null, 3));
+        tmpMap.put("deviceMode", new PropertyCoordinates(null, 4));
+        tmpMap.put("additionalCharacteristics", new PropertyCoordinates(null, 5));
+        tmpMap.put("boughtCard", new PropertyCoordinates(null, 6));
+        tmpMap.put("boughtChip", new PropertyCoordinates(null, 7));
+        tmpMap.put("boughtAccessory", new PropertyCoordinates(null, 8));
+        tmpMap.put("planRating", new PropertyCoordinates(null, 9));
+        tmpMap.put("deviceRating", new PropertyCoordinates(null, 10));
+        tmpMap.put("expressRefillValue", new PropertyCoordinates(null, 11));
+        tmpMap.put("portabilityChange", new PropertyCoordinates(null, 12));
+        tmpMap.put("portabilityChangeReason", new PropertyCoordinates(null, 13));
         return tmpMap;
     }
     

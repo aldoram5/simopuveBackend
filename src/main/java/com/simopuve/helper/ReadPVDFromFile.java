@@ -117,7 +117,10 @@ public class ReadPVDFromFile {
         //TODO revisar si es siempre así 
         int longitud = (sheet.getPhysicalNumberOfRows() - FIRST_ROW)-2;
         int endRows = FIRST_ROW+longitud;
-        for(int i = FIRST_ROW; i <= endRows ; i++){
+        int i = FIRST_ROW;
+        String personNum = getTextFromCell(FIRST_ROW, 0, formatter, sheet, sheet.getRow(FIRST_ROW));
+        boolean isPersonNumberEmpty = personNum.isEmpty();
+        while(!isPersonNumberEmpty){
             Row row = sheet.getRow(i);
             PDVRow PDVRow = new PDVRow();
             
@@ -160,11 +163,13 @@ public class ReadPVDFromFile {
             tmpCoordinate = (PropertyCoordinates) rowMap.get("personNumber");
             text = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY(), formatter, sheet, row);
             PDVRow.setPersonNumber(Integer.parseInt(text));
+            isPersonNumberEmpty = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY(), formatter, sheet, sheet.getRow(i+1)).isEmpty();
             
             tmpCoordinate = (PropertyCoordinates) rowMap.get("expressRefillValue");
             text = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY(), formatter, sheet, row);
             String tmpTxt = text.replace("$", "");
             tmpTxt = tmpTxt.replaceAll("\\s+","");
+            tmpTxt = tmpTxt.replaceAll(",","");
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "valor a convertir:" + tmpTxt);
             PDVRow.setExpressRefillValue(Integer.parseInt(tmpTxt));
             
@@ -181,6 +186,7 @@ public class ReadPVDFromFile {
             PDVRow.setBoughtAccessory(!("No".equals(text)));
             PDVRowList.add(PDVRow);
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, PDVRow.toString());
+            i++;
         }
         
         

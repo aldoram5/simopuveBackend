@@ -13,8 +13,11 @@ import static com.simopuve.helper.ReadPVDFromFile.getPDVSurveyFromFile;
 import com.simopuve.model.BrandDevices;
 import com.simopuve.model.PDVHeader;
 import com.simopuve.model.PDVSurvey;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -34,6 +37,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+import org.joda.time.LocalDate;
+import org.joda.time.MutableDateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -44,35 +52,37 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class SimopuveRESTServices {
 
     private static final String SIMOPUVE_APP_USER_AGENT = "SIMOPUVE-USERAGENT-SIMOPUVE";
-    
-    private final HashMap<String,PDVHeader> logins = new HashMap<String,PDVHeader>(){{
-        put("lidia.besoain:qtyu8998", new PDVHeader("CLARO MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Lidia Besoain", 0,true));
-        put("isabel.nilo:hjsk5612", new PDVHeader("ENTEL MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Isabel Nilo", 0,true));
-        put("isabel.nilo.movi:hjsk5612", new PDVHeader("MOVISTAR MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Isabel Nilo", 0,true));
-        put("hortencia.santander:svsk5112", new PDVHeader("WOM MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Hortencia Santander", 0,true));
-        put("fabiola.sergovia:qwwk5912", new PDVHeader("CLARO MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Fabiola Segovia", 0,true));
-        put("mirian.sergovia:svsk6442", new PDVHeader("ENTEL MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Mirian Segovia", 0,true));
-        put("mirian.sergovia.movi:svsk6442", new PDVHeader("MOVISTAR MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Mirian Segovia", 0,true));
-        put("rocio.cuello:tvnk6543", new PDVHeader("WOM MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Rocio Cuello", 0,true));
-        /*put("javier.vergara:rset1470", new PDVHeader("CLARO VIÑA DEL MAR", "PLAZA VERGARA 126, LOCAL 2", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Javier Vergara", 0,false));
+
+    private final HashMap<String, PDVHeader> logins = new HashMap<String, PDVHeader>() {
+        {
+            put("lidia.besoain:qtyu8998", new PDVHeader("CLARO MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Lidia Besoain", 0, true));
+            put("isabel.nilo:hjsk5612", new PDVHeader("ENTEL MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Isabel Nilo", 0, true));
+            put("isabel.nilo.movi:hjsk5612", new PDVHeader("MOVISTAR MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Isabel Nilo", 0, true));
+            put("hortencia.santander:svsk5112", new PDVHeader("WOM MALL PLAZA ANTOFAGASTA", "MALL PLAZA ANTOFAGASTA", "ANTOFAGASTA", 0, 0, 0, new Date(), "Hortencia Santander", 0, true));
+            put("fabiola.sergovia:qwwk5912", new PDVHeader("CLARO MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Fabiola Segovia", 0, true));
+            put("mirian.sergovia:svsk6442", new PDVHeader("ENTEL MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Mirian Segovia", 0, true));
+            put("mirian.sergovia.movi:svsk6442", new PDVHeader("MOVISTAR MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Mirian Segovia", 0, true));
+            put("rocio.cuello:tvnk6543", new PDVHeader("WOM MALL PLAZA LA SERENA", "MALL PLAZA LA SERENA", "LA SERENA", 0, 0, 0, new Date(), "Rocio Cuello", 0, true));
+            /*put("javier.vergara:rset1470", new PDVHeader("CLARO VIÑA DEL MAR", "PLAZA VERGARA 126, LOCAL 2", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Javier Vergara", 0,false));
         put("franco.krizanic:sgtp2513", new PDVHeader("ENTEL VIÑA DEL MAR", "LIBERTAD 1124", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0,false));
         put("franco.krizanic.movi:sgtp2513", new PDVHeader("MOVISTAR VIÑA DEL MAR", "LIBERTAD 1122, LOCAL F", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0,false));*/
-        put("javier.vergara:rset1470", new PDVHeader("CLARO MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Javier Vergara", 0,true));
-        put("franco.krizanic:sgtp2513", new PDVHeader("ENTEL MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0,true));
-        put("franco.krizanic.movi:sgtp2513", new PDVHeader("MOVISTAR MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0,true));
-        put("julio.moraga:otgj3910", new PDVHeader("WOM MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Julio Moraga", 0,true));
-        put("gloria.jimenez:ctrj7813", new PDVHeader("CLARO MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Gloria Jimenez", 0,true));
-        put("miriam.torres:vnqp3569", new PDVHeader("MOVISTAR MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Miriam Torres", 0,true));
-        put("marianela.oyarzo:klrm1525", new PDVHeader("WOM MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Marianela Oyarzo", 0,true));
-        put("veronica.soffia:pqxb1900", new PDVHeader("CLARO MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Veronica Soffia", 0,true));
-        put("soledad.chacana:xbda3424", new PDVHeader("ENTEL MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0,true));
-        put("soledad.chacana.movi:xbda3424", new PDVHeader("MOVISTAR MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0,true));
-        put("carolina.santander:zfng9821", new PDVHeader("WOM MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Carolina Santander", 0,true));
-        put("berta.gallardo:hesg9899", new PDVHeader("CLARO MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Berta Gallardo", 0,true));
-        put("yanett.busto:vytq8746", new PDVHeader("ENTEL MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Yanett Busto", 0,true));
-        put("ester.calderon:qfer5428", new PDVHeader("MOVISTAR MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0,true));
-        put("ester.calderon.wom:qfer5428", new PDVHeader("WOM MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0,true));
-    }};
+            put("javier.vergara:rset1470", new PDVHeader("CLARO MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Javier Vergara", 0, true));
+            put("franco.krizanic:sgtp2513", new PDVHeader("ENTEL MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0, true));
+            put("franco.krizanic.movi:sgtp2513", new PDVHeader("MOVISTAR MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0, true));
+            put("julio.moraga:otgj3910", new PDVHeader("WOM MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Julio Moraga", 0, true));
+            put("gloria.jimenez:ctrj7813", new PDVHeader("CLARO MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Gloria Jimenez", 0, true));
+            put("miriam.torres:vnqp3569", new PDVHeader("MOVISTAR MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Miriam Torres", 0, true));
+            put("marianela.oyarzo:klrm1525", new PDVHeader("WOM MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Marianela Oyarzo", 0, true));
+            put("veronica.soffia:pqxb1900", new PDVHeader("CLARO MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Veronica Soffia", 0, true));
+            put("soledad.chacana:xbda3424", new PDVHeader("ENTEL MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0, true));
+            put("soledad.chacana.movi:xbda3424", new PDVHeader("MOVISTAR MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0, true));
+            put("carolina.santander:zfng9821", new PDVHeader("WOM MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Carolina Santander", 0, true));
+            put("berta.gallardo:hesg9899", new PDVHeader("CLARO MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Berta Gallardo", 0, true));
+            put("yanett.busto:vytq8746", new PDVHeader("ENTEL MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Yanett Busto", 0, true));
+            put("ester.calderon:qfer5428", new PDVHeader("MOVISTAR MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0, true));
+            put("ester.calderon.wom:qfer5428", new PDVHeader("WOM MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0, true));
+        }
+    };
 
     @Path("/dummy")
     @GET
@@ -81,38 +91,97 @@ public class SimopuveRESTServices {
         return Response.ok("User Agent: " + userAgent + "\n" + "Authorization: " + authorization).build();
     }
 
+    @Path("/rutas")
+    @GET
+    @Produces("text/plain")
+    public String yetAnotherTest() {
+        org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
+        DateTime startDate = new DateTime(2017, 5, 1, 0, 0, 0, 0);
+        DateTime endDate = new DateTime(2017, 5, 31, 0, 0, 0, 0);
+        MutableDateTime currentDate = new MutableDateTime(startDate);
+        List<PDVSurvey> surveyList = new ArrayList<>();
+        File currentFolder;
+        File mallFolder;
+        File officeFolder;
+        File tmpFolder;
+        String varPath;
+        String tmpPath;
+        PDVSurvey survey = null;
+        while (!currentDate.isAfter(endDate)) {
+            varPath = new StringBuilder(System.getProperty("jboss.server.data.dir")).append("/PDV/").append(currentDate.toString(fmt)).append("/").toString();
+            currentFolder = new File(varPath);
+
+            if (currentFolder.exists()) {
+                mallFolder = new File(varPath + "/Mall");
+                officeFolder = new File(varPath + "/Oficina");
+                if (mallFolder.exists()) {
+                    for (File fileEntry : mallFolder.listFiles()) {
+                        try {
+                            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "archivo {0} ", fileEntry.getName());
+                            tmpPath = varPath + "/Mall/" + fileEntry.getName();
+                            survey = getPDVSurveyFromFile(tmpPath, true);
+                            surveyList.add(survey);
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+                if (officeFolder.exists()) {
+                    for (File fileEntry : officeFolder.listFiles()) {
+                        try {
+                            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "archivo {0} ", fileEntry.getName());
+                            tmpPath = varPath + "/Oficina/" + fileEntry.getName();
+                            survey = getPDVSurveyFromFile(tmpPath, false);
+                            surveyList.add(survey);
+                        } catch (IOException ex) {
+                            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
+            Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "-+-+-+-tamaño de lista {0} ", surveyList.size());
+            currentDate.addDays(1);
+        }
+
+        String filePath = new StringBuilder(System.getProperty("jboss.server.data.dir")).append("/PDV/testFlow.xlsx").toString();
+
+        Workbook flowWorkbook = POIHelper.getWorkbookFromLocalReource("plantilla-base-flujo.xlsx");
+        FillFlowBaseSheet(surveyList, flowWorkbook.getSheetAt(0));
+        FillDetailBaseSheet(surveyList, flowWorkbook.getSheetAt(1));
+        POIHelper.writeWorkbookInPath(flowWorkbook, filePath);
+
+        return "Listo";
+    }
+
     @Path("/helloworld")
     @GET
     @Produces("text/plain")
     public String getClichedMessage() {
-        
-        String filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/pdv2.xlsx").toString();
+
+        String filePath = new StringBuilder(System.getProperty("jboss.server.data.dir")).append("/PDV/pdv2.xlsx").toString();
         PDVSurvey survey = null;
         try {
-            
+
             survey = getPDVSurveyFromFile(filePath, false);
             survey.getHeader();
-            
+
             List<PDVSurvey> surveyList = new ArrayList<>();
             surveyList.add(survey);
 
-            filePath = new StringBuilder( System.getProperty("jboss.server.data.dir")).append( "/PDV/testFlow.xlsx").toString();
-            
+            filePath = new StringBuilder(System.getProperty("jboss.server.data.dir")).append("/PDV/testFlow.xlsx").toString();
+
             Workbook flowWorkbook = POIHelper.getWorkbookFromLocalReource("plantilla-base-flujo.xlsx");
             FillFlowBaseSheet(surveyList, flowWorkbook.getSheetAt(0));
             FillDetailBaseSheet(surveyList, flowWorkbook.getSheetAt(1));
             POIHelper.writeWorkbookInPath(flowWorkbook, filePath);
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        return "ewwe: " ;
+
+        return "ewwe: ";
     }
-    
 
     @Path("/brandDevices")
     @GET
@@ -193,11 +262,12 @@ public class SimopuveRESTServices {
                 if (values.length > 0 && values[0].contentEquals("prueba") && values[1].contentEquals("prueba")) {
 
                     return Response.status(200).entity(new PDVHeader("Terapaca", "dirección de prueba", "comuna de prueba", 0, 0, 0, new Date(), "Usuario Pruebas", 0)).build();
-                }if (values.length > 0 && values[0].contentEquals("Prueba") && values[1].contentEquals("Prueba")) {
+                }
+                if (values.length > 0 && values[0].contentEquals("Prueba") && values[1].contentEquals("Prueba")) {
 
                     return Response.status(200).entity(new PDVHeader("Terapaca", "dirección de prueba", "comuna de prueba", 0, 0, 0, new Date(), "Usuario Pruebas", 0)).build();
                 }
-                if(logins.containsKey(credentials)){
+                if (logins.containsKey(credentials)) {
                     return Response.status(200).entity(logins.get(credentials)).build();
                 }
                 //return Response.status(200).entity(new PDVHeader("Terapaca", "dirección chilena", "comuna bonita", 0, 0, 0, new Date(), "Pepe Perez", 0)).build();

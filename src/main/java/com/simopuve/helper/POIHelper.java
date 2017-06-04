@@ -27,7 +27,7 @@ import org.joda.time.Weeks;
  */
 public class POIHelper {
 
-    private static DateTime initDate = new DateTime(2009, 6, 1, 0, 0, 0, 0);
+    private static final DateTime initDate = new DateTime(2009, 6, 1, 0, 0, 0, 0);
 
     public static Workbook getWorkbookFromLocalReource(String resourceName) {
         Workbook wb = null;
