@@ -32,19 +32,19 @@
                 <div layout-gt-xs="row" layout-align="center center" layout-padding>
                     <div flex-gt-xs>
                         <h4>Fecha Inicial</h4>
-                        <md-datepicker ng-model="ctrl.startDate" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-model="ctrl.startDate" md-placeholder="Fecha inicial" md-open-on-focus ></md-datepicker>
                     </div>
 
                     <div flex-gt-xs>
                         <h4>Fecha final</h4>
-                        <md-datepicker ng-model="ctrl.endDate" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-model="ctrl.endDate" md-placeholder="Fecha final" md-open-on-focus></md-datepicker>
                     </div>
                 </div>
                 <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
-                    <md-button class="md-raised md-primary" ng-click="generateReports">Descargar Reporte</md-button>
-                </div>     
-                <div ng-show="showLoadingIndicator">
-                    <md-progress-circular md-mode="indeterminate" md-diameter="160" flex ></md-progress-circular>
+                    <md-button class="md-raised md-primary" ng-click="generateReports();">Generar Reporte</md-button>
+                </div> 
+                <div  ng-show="showLoadingIndicator" layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate" md-diameter="110"></md-progress-circular>
                 </div>
             </md-content>
         </div>
