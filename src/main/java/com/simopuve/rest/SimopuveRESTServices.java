@@ -82,6 +82,10 @@ public class SimopuveRESTServices {
             put("yanett.busto:vytq8746", new PDVHeader("ENTEL MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Yanett Busto", 0, true));
             put("ester.calderon:qfer5428", new PDVHeader("MOVISTAR MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0, true));
             put("ester.calderon.wom:qfer5428", new PDVHeader("WOM MALL PLAZA OESTE", "MALL PLAZA OESTE", "SANTIAGO", 0, 0, 0, new Date(), "Ester Calderon", 0, true));
+            put("milton.cueva.wom:p3MtVB6Q", new PDVHeader("WOM AHUMADA", "AHUMADA 64", "SANTIAGO", 0, 0, 0, new Date(), "Milton Cuevas", 0, false));
+            put("cesar.gonzales.cla:zrq3we7B", new PDVHeader("CLARO AHUMADA", "Ahumada 290", "SANTIAGO", 0, 0, 0, new Date(), "Cesar Gonzales", 0, false));
+            put("sebastian.prado.movh:npCnXlcc", new PDVHeader("MOVISTAR HUERFANOS", "Huerfanos N° 1015 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
+            put("sebastian.prado.enth:YFpzZ78x", new PDVHeader("ENTEL HUERFANOS", "Huerfanos N° 1025 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
         }
     };
 
