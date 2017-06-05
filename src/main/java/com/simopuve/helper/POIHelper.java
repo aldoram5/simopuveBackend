@@ -28,6 +28,7 @@ import org.joda.time.Weeks;
 public class POIHelper {
 
     private static final DateTime initDate = new DateTime(2009, 6, 1, 0, 0, 0, 0);
+    private static final DateTime initDateWeek = new DateTime(2017, 5, 15, 0, 0, 0, 0);
 
     public static Workbook getWorkbookFromLocalReource(String resourceName) {
         Workbook wb = null;
@@ -137,8 +138,8 @@ public class POIHelper {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
         DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
-        Weeks w = Weeks.weeksBetween(initDate, nowDate);
-        return w.getWeeks();
+        Weeks w = Weeks.weeksBetween(initDateWeek, nowDate);
+        return w.getWeeks() + 439;
     }
 
 //    public static void tmp() {
