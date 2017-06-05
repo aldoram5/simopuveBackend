@@ -170,6 +170,7 @@ public class ReadPVDFromFile {
             String tmpTxt = text.replace("$", "");
             tmpTxt = tmpTxt.replaceAll("\\s+","");
             tmpTxt = tmpTxt.replaceAll(",","");
+            tmpTxt = tmpTxt.replaceAll(".","");
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "valor a convertir:" + tmpTxt);
             PDVRow.setExpressRefillValue(Integer.parseInt(tmpTxt));
             
