@@ -25,8 +25,8 @@
 
                 </md-toolbar>
                 <div layout-padding>
-                    
-                <h4>Selecciona el intervalo de fechas para generar tu reporte</h4>
+
+                    <h4>Selecciona el intervalo de fechas para generar tu reporte</h4>
                 </div>
 
                 <div layout-gt-xs="row" layout-align="center center" layout-padding>
@@ -40,8 +40,11 @@
                         <md-datepicker ng-model="ctrl.endDate" md-placeholder="Enter date"></md-datepicker>
                     </div>
                 </div>
-                <div layout-gt-xs="row" layout-align="center center" layout-padding>
-                    <md-button class="md-raised md-primary">Descargar Reporte</md-button>
+                <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
+                    <md-button class="md-raised md-primary" ng-click="generateReports">Descargar Reporte</md-button>
+                </div>     
+                <div ng-show="showLoadingIndicator">
+                    <md-progress-circular md-mode="indeterminate" md-diameter="160" flex ></md-progress-circular>
                 </div>
             </md-content>
         </div>

@@ -33,6 +33,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -91,13 +92,15 @@ public class SimopuveRESTServices {
         return Response.ok("User Agent: " + userAgent + "\n" + "Authorization: " + authorization).build();
     }
 
-    @Path("/rutas")
+    @Path("/reports")
     @GET
     @Produces("text/plain")
-    public String yetAnotherTest() {
+    public String getReportByDateInterval( @QueryParam("from") Date from, @QueryParam("to") Date to) {
+        if(from == null){from = new Date();}
+        if(to == null){to = new Date();}
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
-        DateTime startDate = new DateTime(2017, 5, 1, 0, 0, 0, 0);
-        DateTime endDate = new DateTime(2017, 5, 31, 0, 0, 0, 0);
+        DateTime startDate = new DateTime(from);
+        DateTime endDate = new DateTime(to);
         MutableDateTime currentDate = new MutableDateTime(startDate);
         List<PDVSurvey> surveyList = new ArrayList<>();
         File currentFolder;
