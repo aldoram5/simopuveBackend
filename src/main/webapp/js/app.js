@@ -1,0 +1,1 @@
+angular.module('simopuveApp', ['ngMaterial', 'ngAnimate']);
