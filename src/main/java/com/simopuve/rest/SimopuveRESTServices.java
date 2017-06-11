@@ -86,7 +86,7 @@ public class SimopuveRESTServices {
             put("cesar.gonzales.cla:zrq3we7B", new PDVHeader("CLARO AHUMADA", "Ahumada 290", "SANTIAGO", 0, 0, 0, new Date(), "Cesar Gonzales", 0, false));
             put("sebastian.prado.movh:npCnXlcc", new PDVHeader("MOVISTAR HUERFANOS", "Huerfanos N° 1015 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
             put("sebastian.prado.enth:YFpzZ78x", new PDVHeader("ENTEL HUERFANOS", "Huerfanos N° 1025 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
-            put("root:123456", new PDVHeader("", "", "", 0, 0, 0, new Date(), "", 0, 0));
+            put("root:123456", new PDVHeader("", "", "", 0, 0, 0, new Date(), "", 0, false));
         }
     };
 
