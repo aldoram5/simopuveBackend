@@ -172,7 +172,14 @@ public class ReadPVDFromFile {
             tmpTxt = tmpTxt.replaceAll(",","");
             tmpTxt = tmpTxt.replaceAll(".","");
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "valor a convertir:" + tmpTxt);
-            PDVRow.setExpressRefillValue(Integer.parseInt(tmpTxt));
+            
+            if(tmpTxt == "" || tmpTxt == null)
+                PDVRow.setExpressRefillValue(0);
+            else
+                PDVRow.setExpressRefillValue(Integer.parseInt(tmpTxt));
+            
+            
+            
             
             tmpCoordinate = (PropertyCoordinates) rowMap.get("boughtCard");
             text = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY(), formatter, sheet, row);
