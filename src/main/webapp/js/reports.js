@@ -37,7 +37,7 @@ function reportsCtrl($scope, $http, $mdDialog) {
                 .finally(function () {
                     alert = undefined;
                 });
-    }
+    };
 
 
 }

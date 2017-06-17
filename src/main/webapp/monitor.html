@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="simopuveApp" >
+    <head>
+        <title>SIMOPUVE - Monitoreo encuestadores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.min.js"></script>
+        <!-- Angular Material Library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/monitor.js"></script>
+    </head>
+    <body>    
+        <div ng-controller="ReportsCtrl as ctrl" ng-cloak >
+            <md-content>
+                <md-toolbar class="md-hue-2">
+                    <div class="md-toolbar-tools">
+
+                        <h2 flex md-truncate>SIMOPUVE - Monitoreo</h2>
+                    </div>
+
+                </md-toolbar>
+                <div layout-padding>
+
+                    <h4>En el mapa se muestran en tiempo real las ubicaciones de los encuestadores</h4>
+                </div>
+                <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
+                    <md-button class="md-raised md-primary" ng-click="generateReports();">Aún no hay mapa</md-button>
+                </div> 
+                <div  ng-show="showLoadingIndicator" layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate" md-diameter="110"></md-progress-circular>
+                </div>
+            </md-content>
+        </div>
+    </body>
+</html>
