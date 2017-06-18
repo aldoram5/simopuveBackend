@@ -6,9 +6,6 @@ import static com.simopuve.helper.UsefulConstants.FIRST_ROW;
 import com.simopuve.model.PDVHeader;
 import com.simopuve.model.PDVRow;
 import com.simopuve.model.PDVSurvey;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +20,6 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -172,8 +168,9 @@ public class ReadPVDFromFile {
             tmpTxt = tmpTxt.replaceAll(",","");
             tmpTxt = tmpTxt.replaceAll(".","");
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "valor a convertir:" + tmpTxt);
-            
-            if(tmpTxt == "" || tmpTxt == null)
+            if(tmpTxt.isEmpty())
+                PDVRow.setExpressRefillValue(0);
+            else if(tmpTxt == "" || tmpTxt == null)
                 PDVRow.setExpressRefillValue(0);
             else
                 PDVRow.setExpressRefillValue(Integer.parseInt(tmpTxt));

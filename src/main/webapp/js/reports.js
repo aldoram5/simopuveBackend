@@ -15,7 +15,8 @@ function reportsCtrl($scope, $http, $mdDialog) {
     var endDateString = ($scope.endDate.getMonth() + 1)+'/'+$scope.endDate.getDate()+'/'+$scope.endDate.getFullYear();
     console.log(startDateString);
     console.log(endDateString);
-    $http.get('http://drivechile.dynu.net/simopuve/rest/api/reports?from=' + startDateString + '&to=' + endDateString)
+//    $http.get('http://drivechile.dynu.net/simopuve/rest/api/reports?from=' + startDateString + '&to=' + endDateString)
+    $http.get('./rest/api/reports?from=' + startDateString + '&to=' + endDateString)
                 .then(function (data) {
                     $scope.showLoadingIndicator = false;
                     $scope.showAlert("Exito", "El reporte se ha generado exitosamente");
