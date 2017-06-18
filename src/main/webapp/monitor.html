@@ -40,8 +40,9 @@
                         <tr ng-repeat-start="item in statuses">                            
                             <td rowspan="{{item.name.length}}">{{item.name}}</td>
                             <td rowspan="{{item.pointOfSaleAssigned.length}}">{{item.pointOfSaleAssigned}}</td>
-                            
-                        </tr>                        
+
+                        </tr>       
+                        <tr ng-repeat-end>I also get repeated</tr>
                     </tbody>
                 </table>
                 <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
@@ -52,6 +53,6 @@
                 </div>
             </md-content>
         </div>
-        
+
     </body>
 </html>
