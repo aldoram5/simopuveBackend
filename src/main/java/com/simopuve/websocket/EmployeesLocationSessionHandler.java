@@ -69,7 +69,7 @@ public class EmployeesLocationSessionHandler {
                 .add("latitude", status.getLatitude())
                 .add("longitude", status.getLongitude())
                 .add("address", status.getLatitudeLongitudeAdress())
-                .add("description", status.getLastUpdated().getTime())
+                .add("lastUpdatedTime", status.getLastUpdated().getTime())
                 .build();
         return addMessage;
     }
