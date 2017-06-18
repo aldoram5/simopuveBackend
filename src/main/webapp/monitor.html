@@ -28,6 +28,37 @@
 
                     <h4>En el mapa se muestran en tiempo real las ubicaciones de los encuestadores</h4>
                 </div>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Encuestador</th>
+                            <th>Punto de venta</th>
+                            <th>Ubicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat-start="item in statuses">                            
+                            <td rowspan="{{item.name.length}}">{{item.name}}</td>
+                            <td rowspan="{{item.pointOfSaleAssigned.length}}">{{item.pointOfSaleAssigned}}</td>
+                            <td >
+                                <div id="map"></div>
+                                <script>
+                                    function initMap() {
+                                        var uluru = {lat: item.latitude, lng: item.longitude};
+                                        var map = new google.maps.Map(document.getElementById('map'), {
+                                            zoom: 90,
+                                            center: uluru
+                                        });
+                                        var marker = new google.maps.Marker({
+                                            position: uluru,
+                                            map: map
+                                        });
+                                    }
+                                </script>
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
                 <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
                     <md-button class="md-raised md-primary" ng-click="generateReports();">Aún no hay mapa</md-button>
                 </div> 
@@ -36,5 +67,8 @@
                 </div>
             </md-content>
         </div>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56xrI9lSN-pwGU3QLdpCPaZq9asjoKYk&callback=initMap">
+        </script>
     </body>
 </html>
