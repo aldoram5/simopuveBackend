@@ -5,14 +5,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-aria.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.min.js"></script>
+
         <!-- Angular Material Library -->
         <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
         <script src="js/app.js"></script>
         <script src="js/monitor.js"></script>
+        <script src="js/map.js"></script>
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 500px;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
     <body>    
         <div ng-controller="MonitorCtrl as ctrl" ng-cloak >
@@ -28,31 +44,48 @@
 
                     <h4>En el mapa se muestran en tiempo real las ubicaciones de los encuestadores</h4>
                 </div>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Encuestador</th>
-                            <th>Punto de venta</th>
-                            <th>Ubicación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat-start="item in statuses">                            
-                            <td rowspan="{{item.name.length}}">{{item.name}}</td>
-                            <td rowspan="{{item.pointOfSaleAssigned.length}}">{{item.pointOfSaleAssigned}}</td>
 
-                        </tr>       
-                        <tr ng-repeat-end>I also get repeated</tr>
-                    </tbody>
-                </table>
-                <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
-                    <md-button class="md-raised md-primary" ng-click="generateReports();">Aún no hay mapa</md-button>
-                </div> 
+
                 <div  ng-show="showLoadingIndicator" layout="row" layout-sm="column" layout-align="space-around">
                     <md-progress-circular md-mode="indeterminate" md-diameter="110"></md-progress-circular>
+                </div>          
+                <div ng-app="simopuveApp" ng-controller="MonitorCtrl">                    
+                    <div flex-gt-sm="50" flex>
+
+                        <md-toolbar layout="row" class="md-hue-3">
+                            <div class="md-toolbar-tools">
+                                <span>Ubicación de encuestadores</span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-content>
+                            <md-list flex>
+
+                                <md-list-item class="md-3-line" ng-repeat="marker in markers"  >
+
+                                    <div class="md-list-item-text" layout="column">
+
+                                        <p><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></p>
+                                    </div>
+                                </md-list-item>
+
+                            </md-list>
+                        </md-content>
+                        <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
+                            <md-button class="md-raised md-primary" ng-click="generateReports();">Comenzar monitoreo</md-button>
+                        </div> 
+                    </div>
+
+                    <br /><br /><br />
+                    <div id="map"></div> 
                 </div>
+
             </md-content>
+
+
         </div>
 
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56xrI9lSN-pwGU3QLdpCPaZq9asjoKYk"></script>
     </body>
 </html>
