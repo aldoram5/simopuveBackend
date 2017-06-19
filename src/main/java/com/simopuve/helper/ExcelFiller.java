@@ -147,7 +147,7 @@ public class ExcelFiller {
                                 Calendar cal = Calendar.getInstance();
                                 cal.setTime(date);
                                 int year = cal.get(Calendar.YEAR);
-                                int month = cal.get(Calendar.MONTH);
+                                int month = cal.get(Calendar.MONTH) + 1;
                                 int day = cal.get(Calendar.DAY_OF_MONTH);
                                 cell.setCellValue((Integer) day);
                                 cell = row.getCell(tmpCoordinate.getCellY() + 1);

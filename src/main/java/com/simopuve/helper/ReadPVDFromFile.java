@@ -87,8 +87,10 @@ public class ReadPVDFromFile {
         String month = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY() + 1, formatter, sheet, null);
         String year = getTextFromCell(tmpCoordinate.getRowX(), tmpCoordinate.getCellY() + 2 , formatter, sheet, null);
         Date currentDate;
-        try {
-            currentDate = new SimpleDateFormat("dd/MM/yyyy").parse( day + "/" + month + "/" + year );
+        try {           
+            Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "combirtiendo valores:" + month);
+            int tmpMoth = Integer.parseInt(month)-1;
+            currentDate = new SimpleDateFormat("dd/MM/yyyy").parse( day + "/" + tmpMoth + "/" + year );            
             PDVHeader.setSurveyDate(currentDate);
         } catch (ParseException ex) {
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.SEVERE, null, ex);
