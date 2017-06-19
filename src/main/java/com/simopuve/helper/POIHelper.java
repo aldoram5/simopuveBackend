@@ -63,7 +63,7 @@ public class POIHelper {
     public static String getFlowBaseFormatDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        Integer tmpMoth = cal.get(Calendar.MONTH)+1;
+        Integer tmpMoth = cal.get(Calendar.MONTH);
         return cal.get(Calendar.DAY_OF_MONTH) + "/" + tmpMoth + "/" + cal.get(Calendar.YEAR);
     }
 
