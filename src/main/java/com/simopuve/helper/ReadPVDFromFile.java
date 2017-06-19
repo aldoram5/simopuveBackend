@@ -89,7 +89,7 @@ public class ReadPVDFromFile {
         Date currentDate;
         try {           
             Logger.getLogger(ReadPVDFromFile.class.getName()).log(Level.INFO, "combirtiendo valores:" + month);
-            int tmpMoth = Integer.parseInt(month)-1;
+            int tmpMoth = Integer.parseInt(month)+1;
             currentDate = new SimpleDateFormat("dd/MM/yyyy").parse( day + "/" + tmpMoth + "/" + year );            
             PDVHeader.setSurveyDate(currentDate);
         } catch (ParseException ex) {
