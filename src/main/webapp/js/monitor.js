@@ -85,8 +85,8 @@ function monitorCtrl($scope, $http, $mdDialog) {
 
     });
 
-    function ponlos(){
-        for (i = 0; i < $scope.statuses.length; i++) {
+    function updateMarkers(){
+        for (i = 0; i < ($scope.statuses.length); i++) {
             createMarker($scope.statuses[i]);
         }
     }
@@ -124,7 +124,8 @@ function monitorCtrl($scope, $http, $mdDialog) {
     $scope.drawStatusesToMap = function () {
         //$scope.showLoadingIndicator = true;
         console.log($scope.statuses);
-        ponlos();
+        $scope.markers = [];
+        updateMarkers();
         //TODO Do GMaps stuff 
 
     };
