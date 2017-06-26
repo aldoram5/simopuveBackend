@@ -20,7 +20,7 @@
             /* Always set the map height explicitly to define the size of the div
              * element that contains the map. */
             #map {
-                height: 500px;
+                height: 700px;
             }
             /* Optional: Makes the sample page fill the window. */
             html, body {
@@ -49,35 +49,44 @@
                 <div  ng-show="showLoadingIndicator" layout="row" layout-sm="column" layout-align="space-around">
                     <md-progress-circular md-mode="indeterminate" md-diameter="110"></md-progress-circular>
                 </div>          
-                <div ng-app="simopuveApp" ng-controller="MonitorCtrl">                    
-                    <div flex-gt-sm="50" flex>
+                <div ng-app="simopuveApp" ng-controller="MonitorCtrl">  
+                    
 
-                        <md-toolbar layout="row" class="md-hue-3">
-                            <div class="md-toolbar-tools">
-                                <span>Ubicación de encuestadores</span>
-                            </div>
-                        </md-toolbar>
+                    <div layout-gt-sm="row" layout="column">
+                        <div flex-gt-sm="50" flex>
+                            <md-toolbar layout="row" class="md-hue-3">
+                                <div class="md-toolbar-tools">
+                                    <span>Ubicación de encuestadores</span>
+                                </div>
+                            </md-toolbar>
 
-                        <md-content>
-                            <md-list flex>
+                            <md-content>
+                                <md-list flex>
 
-                                <md-list-item class="md-3-line" ng-repeat="marker in markers"  >
+                                    <md-list-item class="md-3-line" ng-repeat="marker in markers"  >
 
-                                    <div class="md-list-item-text" layout="column">
+                                        <div class="md-list-item-text" layout="column">
 
-                                        <p><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></p>
-                                    </div>
-                                </md-list-item>
+                                            <p><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></p>
+                                        </div>
+                                    </md-list-item>
 
-                            </md-list>
-                        </md-content>
-                        <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
-                            <md-button class="md-raised md-primary" ng-click="generateReports();">Comenzar monitoreo</md-button>
-                        </div> 
+                                </md-list>
+                            </md-content>
+                            <div ng-show="!showLoadingIndicator" layout-gt-xs="row" layout-align="center center" layout-padding>
+                                <md-button class="md-raised md-primary" ng-click="generateReports();">Comenzar monitoreo</md-button>
+                            </div> 
+
+                        </div>
+
+                        <md-divider></md-divider>
+
+                        <div flex-gt-sm="50" flex>
+
+                            <div id="map"></div> 
+                        </div>
                     </div>
 
-                    <br /><br /><br />
-                    <div id="map"></div> 
                 </div>
 
             </md-content>

@@ -41,7 +41,7 @@ function monitorCtrl($scope, $http, $mdDialog) {
         }
     ];
     var mapOptions = {
-        zoom: 4,
+        zoom: 12,
         center: new google.maps.LatLng(-33.447487, -70.673676),
         mapTypeId: google.maps.MapTypeId.TERRAIN
     }
