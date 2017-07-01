@@ -129,7 +129,7 @@ public class POIHelper {
     public static Integer getMonthNumber(Date currentDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
-        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
+        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
         Months m = Months.monthsBetween(initDate, nowDate);
         return m.getMonths();
     }
@@ -139,7 +139,7 @@ public class POIHelper {
         cal.setTime(currentDate);
         DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
         Weeks w = Weeks.weeksBetween(initDateWeek, nowDate);
-        return w.getWeeks() + 439;
+        return w.getWeeks() + 435;
     }
 
 //    public static void tmp() {

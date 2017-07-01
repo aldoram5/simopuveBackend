@@ -88,7 +88,7 @@ public class FlowDataCreator {
 		cell.setCellValue(getMonthNumber(header.getSurveyDate()));
                 
                 cell = row.createCell(17);
-		cell.setCellValue((header.isMall()) ? "Mall" : "Oficina");
+		cell.setCellValue((header.isMall()) ? "MALL" : "OFICINA");
                 
                 //TODO
                 cell = row.createCell(18);
@@ -162,14 +162,14 @@ public class FlowDataCreator {
 
             //TODO Semana
             cell = row.createCell(11);
-            cell.setCellValue(getWeekNumber(header.getSurveyDate()));
+            cell.setCellValue("SEMANA " + getWeekNumber(header.getSurveyDate()));
             
             //TODO Mes
             cell = row.createCell(12);
-            cell.setCellValue(getMonthNumber(header.getSurveyDate()));
+            cell.setCellValue("MES " + getMonthNumber(header.getSurveyDate()));
 
             cell = row.createCell(13);
-            cell.setCellValue((header.isMall()) ? "Mall" : "Oficina");
+            cell.setCellValue((header.isMall()) ? "MALL" : "OFICINA");
 
             rowIndex++;
         }
