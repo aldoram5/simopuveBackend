@@ -81,6 +81,11 @@ public class SimopuveRESTServices {
             put("cesar.gonzales.cla:zrq3we7B", new PDVHeader("CLARO AHUMADA", "Ahumada 290", "SANTIAGO", 0, 0, 0, new Date(), "Cesar Gonzales", 0, false));
             put("sebastian.prado.movh:npCnXlcc", new PDVHeader("MOVISTAR HUERFANOS", "Huerfanos N° 1015 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
             put("sebastian.prado.enth:YFpzZ78x", new PDVHeader("ENTEL HUERFANOS", "Huerfanos N° 1025 - SANTIAGO", "SANTIAGO", 0, 0, 0, new Date(), "Sebastian Prado", 0, false));
+            put("carla.f:1155yQNl", new PDVHeader("TALCA CLARO", "8 Oriente Nº 1164 (Movired)", "TALCA", 0, 0, 0, new Date(), "Carla Figueroa ", 0, false));
+            put("guille.s:5356jtTA", new PDVHeader("TALCA ENTEL","1 Sur Nº 1271 (entre 5 y 6 oriente) ","TALCA" ,0, 0, 0, new Date(), "Guillermo Stull", 0, false));
+            put("maria.d:9715ZLmq", new PDVHeader("TALCA MOVISTAR","1 Sur Nº 1170 (entre 4 y 5 oriente)","TALCA" ,0, 0, 0, new Date(), "María Duran ", 0, false));    
+            put("carla.s:6116lFbo", new PDVHeader("TALCA Wom","1 SUR 1279","TALCA" ,0, 0, 0, new Date(), "Carla Stull", 0, false));
+            put("", new PDVHeader("","","" ,0, 0, 0, new Date(), "", 0, false));
             put("root:123456", new PDVHeader("", "", "", 0, 0, 0, new Date(), "", 0, false));
         }
     };
