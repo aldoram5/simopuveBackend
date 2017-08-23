@@ -66,9 +66,10 @@ public class SimopuveRESTServices {
             put("franco.krizanic:sgtp2513", new PDVHeader("ENTEL MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0, true));
             put("franco.krizanic.movi:sgtp2513", new PDVHeader("MOVISTAR MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Franco Krizanic", 0, true));
             put("julio.moraga:otgj3910", new PDVHeader("WOM MALL MARINA ARAUCO", "MALL MARINA ARAUCO", "VIÑA DEL MAR", 0, 0, 0, new Date(), "Julio Moraga", 0, true));
-            put("gloria.jimenez:ctrj7813", new PDVHeader("CLARO MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Gloria Jimenez", 0, true));
-            put("miriam.torres:vnqp3569", new PDVHeader("MOVISTAR MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Miriam Torres", 0, true));
-            put("marianela.oyarzo:klrm1525", new PDVHeader("WOM MALL PARQUE ARAUCO", "MALL PARQUE ARAUCO", "SANTIAGO", 0, 0, 0, new Date(), "Marianela Oyarzo", 0, true));
+            put("gloria.jimenez:ctrj7813", new PDVHeader("CLARO MALL PLAZA NORTE", "MALL PLAZA NORTE", "SANTIAGO", 0, 0, 0, new Date(), "Gloria Jimenez", 0, true));
+            put("miriam.torres:vnqp3569", new PDVHeader("MOVISTAR MALL PLAZA NORTE", "MALL PLAZA NORTE", "SANTIAGO", 0, 0, 0, new Date(), "Miriam Torres", 0, true));
+            put("marianela.oyarzo:klrm1525", new PDVHeader("WOM MALL PLAZA NORTE", "MALL PLAZA NORTE", "SANTIAGO", 0, 0, 0, new Date(), "Marianela Oyarzo", 0, true));
+            put("entel.norte:kpum1923", new PDVHeader("ENTEL MALL PLAZA NORTE", "MALL PLAZA NORTE", "SANTIAGO", 0, 0, 0, new Date(), "Sin Asignar", 0, true));
             put("veronica.soffia:pqxb1900", new PDVHeader("CLARO MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Veronica Soffia", 0, true));
             put("soledad.chacana:xbda3424", new PDVHeader("ENTEL MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0, true));
             put("soledad.chacana.movi:xbda3424", new PDVHeader("MOVISTAR MALL PLAZA VESPUCIO", "MALL PLAZA VESPUCIO", "SANTIAGO", 0, 0, 0, new Date(), "Soledad Chacana", 0, true));
@@ -85,7 +86,7 @@ public class SimopuveRESTServices {
             put("guille.s:5356jtTA", new PDVHeader("TALCA ENTEL","1 Sur Nº 1271 (entre 5 y 6 oriente) ","TALCA" ,0, 0, 0, new Date(), "Guillermo Stull", 0, false));
             put("maria.d:9715ZLmq", new PDVHeader("TALCA MOVISTAR","1 Sur Nº 1170 (entre 4 y 5 oriente)","TALCA" ,0, 0, 0, new Date(), "Maria Duran ", 0, false));    
             put("carla.s:6116lFbo", new PDVHeader("TALCA Wom","1 SUR 1279","TALCA" ,0, 0, 0, new Date(), "Carla Stull", 0, false));
-            put("lorenza.b:1009BXKn", new PDVHeader("CLARO CONCEPCION","O\'Higgins N 796","CONCEPCION" ,0, 0, 0, new Date(), "Lorenza Barra", 0, false));
+            put("lorenza.b:1009BXKn", new PDVHeader("CLARO CONCEPCION","O\'Higgins N 788","CONCEPCION" ,0, 0, 0, new Date(), "Lorenza Barra", 0, false));
             put("gladys.h:4137kpqw", new PDVHeader("ENTEL CONCEPCION","O\'Higgins N 824","CONCEPCION" ,0, 0, 0, new Date(), "Gladys Herrera", 0, false));            
             put("pablo.g:1871Axed", new PDVHeader("MOVISTAR CONCEPCION","O\'Higgins N 674","CONCEPCION" ,0, 0, 0, new Date(), "Pablo Gonzalez", 0, false));
             put("macarena.a:5620LseT", new PDVHeader("Wom CONCEPCION","O\'Higgins N ","CONCEPCION" ,0, 0, 0, new Date(), "Macarena Araneda", 0, false));
