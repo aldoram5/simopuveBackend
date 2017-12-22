@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.joda.time.DateTime;
 import org.joda.time.Months;
 import org.joda.time.Weeks;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -137,7 +138,9 @@ public class POIHelper {
     public static Integer getWeekNumber(Date currentDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
-        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
+        org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
+        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH) + 1+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
+        //DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
         Weeks w = Weeks.weeksBetween(initDateWeek, nowDate);
         return w.getWeeks() + 435;
     }
