@@ -130,7 +130,8 @@ public class POIHelper {
     public static Integer getMonthNumber(Date currentDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
-        DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
+        org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
+        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH) + 1+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
         Months m = Months.monthsBetween(initDate, nowDate);
         return m.getMonths();
     }
