@@ -5,6 +5,7 @@
  */
 package com.simopuve.helper;
 
+import com.simopuve.rest.SimopuveRESTServices;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -131,7 +132,7 @@ public class POIHelper {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
-        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH) + 1+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
+        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+(cal.get(Calendar.MONTH) + 1)+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
         Months m = Months.monthsBetween(initDate, nowDate);
         return m.getMonths();
     }
@@ -139,8 +140,9 @@ public class POIHelper {
     public static Integer getWeekNumber(Date currentDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
+        Logger.getLogger(POIHelper.class.getName()).log(Level.INFO, "Received date: " +cal.get(Calendar.DAY_OF_MONTH)+"-"+(cal.get(Calendar.MONTH) + 1)+"-"+cal.get(Calendar.YEAR));
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
-        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH) + 1+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
+        DateTime nowDate = fmt.parseLocalDate(cal.get(Calendar.DAY_OF_MONTH)+"-"+(cal.get(Calendar.MONTH) + 1)+"-"+cal.get(Calendar.YEAR)).toDateTimeAtCurrentTime();
         //DateTime nowDate = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0);
         Weeks w = Weeks.weeksBetween(initDateWeek, nowDate);
         return w.getWeeks() + 435;
