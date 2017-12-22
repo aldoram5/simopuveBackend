@@ -11,8 +11,8 @@ function reportsCtrl($scope, $http, $mdDialog) {
 
     $scope.generateReports = function () {
     $scope.showLoadingIndicator = true;
-    var startDateString = ($scope.startDate.getDate()+1)+'/'+$scope.startDate.getMonth()+'/'+$scope.startDate.getFullYear();
-    var endDateString = ($scope.endDate.getDate() + 1)+'/'+$scope.endDate.getMonth()+'/'+$scope.endDate.getFullYear();
+    var startDateString = ($scope.startDate.getDate())+'/'+($scope.startDate.getMonth()+1)+'/'+$scope.startDate.getFullYear();
+    var endDateString = ($scope.endDate.getDate())+'/'+($scope.endDate.getMonth()+1)+'/'+$scope.endDate.getFullYear();
     console.log(startDateString);
     console.log(endDateString);
 //    $http.get('http://drivechile.dynu.net/simopuve/rest/api/reports?from=' + startDateString + '&to=' + endDateString)
