@@ -114,6 +114,7 @@ public class SimopuveRESTServices {
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
         DateTime startDate = new DateTime(from);
         DateTime endDate = new DateTime(to);
+        Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received UA: " + from);
         MutableDateTime currentDate = new MutableDateTime(startDate);
         List<PDVSurvey> surveyList = new ArrayList<>();
         File currentFolder;

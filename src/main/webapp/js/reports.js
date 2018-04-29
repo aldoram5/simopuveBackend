@@ -10,13 +10,13 @@ function reportsCtrl($scope, $http, $mdDialog) {
     $scope.showLoadingIndicator = false;
 
     $scope.generateReports = function () {
-    $scope.showLoadingIndicator = true;
-    var startDateString = ($scope.startDate.getDate())+'/'+($scope.startDate.getMonth()+1)+'/'+$scope.startDate.getFullYear();
-    var endDateString = ($scope.endDate.getDate())+'/'+($scope.endDate.getMonth()+1)+'/'+$scope.endDate.getFullYear();
-    console.log(startDateString);
-    console.log(endDateString);
+        $scope.showLoadingIndicator = true;
+        var startDateString = ($scope.startDate.getDate()) + '/' + ($scope.startDate.getMonth() + 1) + '/' + $scope.startDate.getFullYear();
+        var endDateString = ($scope.endDate.getDate()) + '/' + ($scope.endDate.getMonth() + 1) + '/' + $scope.endDate.getFullYear();
+        console.log(startDateString);
+        console.log(endDateString);
 //    $http.get('http://drivechile.dynu.net/simopuve/rest/api/reports?from=' + startDateString + '&to=' + endDateString)
-    $http.get('./rest/api/reports?from=' + startDateString + '&to=' + endDateString)
+        $http.get('./rest/api/reports?from=' + startDateString + '&to=' + endDateString)
                 .then(function (data) {
                     $scope.showLoadingIndicator = false;
                     $scope.showAlert("Exito", "El reporte se ha generado exitosamente");
