@@ -16,6 +16,8 @@ import com.simopuve.model.PDVSurvey;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -108,12 +110,28 @@ public class SimopuveRESTServices {
     @Path("/reports")
     @GET
     @Produces("text/plain")
-    public String getReportByDateInterval( @QueryParam("from") Date from, @QueryParam("to") Date to) {
-        if(from == null){from = new Date();}
-        if(to == null){to = new Date();}
+    public String getReportByDateInterval( @QueryParam("from") String from, @QueryParam("to") String to) {
+        Date start;
+        Date end;
+        if(from == null){start = new Date();}
+        else{ try {
+            start = new SimpleDateFormat("dd-MM-yyyy").parse(from);
+            } catch (ParseException ex) {
+                start = new Date();
+                Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+        if(to == null){end = new Date();}
+        else{ try {
+            end = new SimpleDateFormat("dd-MM-yyyy").parse(to);
+            } catch (ParseException ex) {
+                end = new Date();
+                Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyy");
-        DateTime startDate = new DateTime(from);
-        DateTime endDate = new DateTime(to);
+        DateTime startDate = new DateTime(start);
+        DateTime endDate = new DateTime(end);
         Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received UA: " + from);
         MutableDateTime currentDate = new MutableDateTime(startDate);
         List<PDVSurvey> surveyList = new ArrayList<>();
