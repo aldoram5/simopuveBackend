@@ -115,7 +115,7 @@ public class SimopuveRESTServices {
         Date end;
         if(from == null){start = new Date();}
         else{ try {
-            start = new SimpleDateFormat("MM/dd/yyyy").parse(from);
+            start = new SimpleDateFormat("dd/MM/yyyy").parse(from);
             } catch (ParseException ex) {
                 start = new Date();
                 Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +123,7 @@ public class SimopuveRESTServices {
 }
         if(to == null){end = new Date();}
         else{ try {
-            end = new SimpleDateFormat("MM/dd/yyyy").parse(to);
+            end = new SimpleDateFormat("dd/MM/yyyy").parse(to);
             } catch (ParseException ex) {
                 end = new Date();
                 Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,6 +133,7 @@ public class SimopuveRESTServices {
         DateTime startDate = new DateTime(start);
         DateTime endDate = new DateTime(end);
         Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received UA: " + start);
+        Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received UA: " + from);
         Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received UA: " + startDate);
         MutableDateTime currentDate = new MutableDateTime(startDate);
         List<PDVSurvey> surveyList = new ArrayList<>();
