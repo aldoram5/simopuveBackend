@@ -124,6 +124,7 @@ public class SimopuveRESTServices {
         String varPath;
         String tmpPath;
         PDVSurvey survey = null;
+        Logger.getLogger(SimopuveRESTServices.class.getName()).log(Level.INFO, "Received startdate: " + startDate);
         while (!currentDate.isAfter(endDate)) {
             varPath = new StringBuilder(System.getProperty("jboss.server.data.dir")).append("/PDV/").append(currentDate.toString(fmt)).append("/").toString();
             currentFolder = new File(varPath);
